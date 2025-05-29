@@ -25,6 +25,12 @@ public class Customer extends BaseEntity {
     }
 
     public void setEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty");
+        }
+        if (!email.matches("^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,}$")) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
         this.email = email;
     }
 
@@ -33,6 +39,12 @@ public class Customer extends BaseEntity {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
+            throw new IllegalArgumentException("Phone number cannot be null or empty");
+        }
+        if (!phoneNumber.matches("^\\+?[0-9]{7,15}$")) {
+            throw new IllegalArgumentException("Invalid phone number format");
+        }
         this.phoneNumber = phoneNumber;
     }
 
@@ -41,6 +53,10 @@ public class Customer extends BaseEntity {
     }
 
     public void setTickets(List<Ticket> tickets) {
+        if (tickets == null) {
+            throw new IllegalArgumentException("Tickets list cannot be null");
+        }
         this.tickets = tickets;
     }
 }
+

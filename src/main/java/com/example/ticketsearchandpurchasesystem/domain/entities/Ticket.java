@@ -31,6 +31,9 @@ public class Ticket extends BaseEntity {
     }
 
     public void setSeatNumber(int seatNumber) {
+        if (seatNumber <= 0) {
+            throw new IllegalArgumentException("Seat number must be greater than zero");
+        }
         this.seatNumber = seatNumber;
     }
 
@@ -39,6 +42,9 @@ public class Ticket extends BaseEntity {
     }
 
     public void setCustomer(Customer customer) {
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer cannot be null");
+        }
         this.customer = customer;
     }
 
@@ -47,6 +53,9 @@ public class Ticket extends BaseEntity {
     }
 
     public void setEvent(Event event) {
+        if (event == null) {
+            throw new IllegalArgumentException("Event cannot be null");
+        }
         this.event = event;
     }
 
@@ -55,6 +64,9 @@ public class Ticket extends BaseEntity {
     }
 
     public void setStatus(Status status) {
+        if (status == null) {
+            throw new IllegalArgumentException("Status cannot be null");
+        }
         this.status = status;
     }
 }

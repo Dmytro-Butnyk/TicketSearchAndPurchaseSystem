@@ -29,6 +29,12 @@ public class Event extends BaseEntity {
     }
 
     public void setDate(LocalDate date) {
+        if (date == null) {
+            throw new IllegalArgumentException("Event date cannot be null");
+        }
+        if (date.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Event date cannot be in the past");
+        }
         this.date = date;
     }
 
@@ -37,7 +43,13 @@ public class Event extends BaseEntity {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Event name cannot be null or empty");
+        }
+        if (name.length() < 3 || name.length() > 100) {
+            throw new IllegalArgumentException("Event name must be between 3 and 100 characters");
+        }
+        this.name = name.trim();
     }
 
     public Place getPlace() {
@@ -45,6 +57,9 @@ public class Event extends BaseEntity {
     }
 
     public void setPlace(Place place) {
+        if (place == null) {
+            throw new IllegalArgumentException("Event must be associated with a place");
+        }
         this.place = place;
     }
 
@@ -53,6 +68,9 @@ public class Event extends BaseEntity {
     }
 
     public void setTickets(List<Ticket> tickets) {
+        if (tickets == null) {
+            throw new IllegalArgumentException("Tickets list cannot be null");
+        }
         this.tickets = tickets;
     }
 }

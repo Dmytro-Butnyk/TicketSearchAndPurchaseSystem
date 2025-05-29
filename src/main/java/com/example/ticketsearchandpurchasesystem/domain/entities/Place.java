@@ -20,7 +20,13 @@ public class Place extends BaseEntity {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        if (address == null || address.trim().isEmpty()) {
+            throw new IllegalArgumentException("Address cannot be null or empty");
+        }
+        if (address.length() < 5 || address.length() > 200) {
+            throw new IllegalArgumentException("Address must be between 5 and 200 characters");
+        }
+        this.address = address.trim();
     }
 
     public String getName() {
@@ -28,6 +34,13 @@ public class Place extends BaseEntity {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Place name cannot be null or empty");
+        }
+        if (name.length() < 2 || name.length() > 100) {
+            throw new IllegalArgumentException("Place name must be between 2 and 100 characters");
+        }
+        this.name = name.trim();
     }
 }
+
